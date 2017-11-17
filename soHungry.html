@@ -9,6 +9,10 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="  crossorigin="anonymous"></script>
+
 </head>
 <body>
 
@@ -82,10 +86,10 @@
               </div>
               <div class="row" id="buttonRows">
                 <div class="col s6">
-                  <a class="waves-effect waves-light btn-large" id="feastButton"><i class="material-icons left">cloud</i>Feast!</a>
+                  <button class="waves-effect waves-light btn-large" type="button" id="feastButton"><i class="material-icons left">cloud</i>Feast!</button>
                 </div>
                 <div class="col s6">
-                  <a class="waves-effect waves-light btn-large" id="newIngredientButton"><i class="material-icons right">cloud</i>Another Ingredient!</a>
+                  <button class="waves-effect waves-light btn-large" type="button" id="newIngredientButton"><i class="material-icons right">cloud</i>Another Ingredient!</button>
                 </div>
               </div>
             </form>
@@ -115,6 +119,8 @@
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
+  <!-- Link to our javascript logic -->
+  <script type="text/javascript" src="js/hungry.js"></script>
 
 </body>
 </html>
