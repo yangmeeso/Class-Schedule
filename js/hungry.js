@@ -4,6 +4,9 @@
 // Initialize to "1" here because the original row is row 0 
 var newIngredientNameAndRow = 1;
 
+//Place holder for the provided name
+var nameProvided = '';
+
 
 // Initialize Firebase
 var config = {
@@ -77,7 +80,10 @@ function addNewIngredients(){
 
 	// Loop to grab Ingredients
 	for(var i=0; i < newIngredientNameAndRow; i++){
-		var objNameValue = $("#yourName"+ i).val();
+		// Using the same name each time
+		var objNameValue = $("#yourName0").val();
+		
+		//var objNameValue = nameProvided;
 		var objIngredientValue = $("#ingredient"+ i).val();
 		
 		// "i" added to object name to force name to be unique
@@ -118,6 +124,9 @@ function createIngredientLine(){
 	newNameLabel.text("Your Name");
 
 	newNameDiv.append(newNameInput, newNameLabel);
+
+	//Make this new div hidden.  Will take space col 6
+	newNameDiv.css("visibility","hidden");
 
 
 	// Create newIngredient div
