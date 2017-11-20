@@ -24,41 +24,7 @@ var database = firebase.database();
 
 
 
-// Performs the Reciepe lookup
-function edamamAPI(newIngredients){
-
-	var applicationID = "ee864bfc";
-	var receipeSearchAPIKey = "bd4299ab0500d03db078800ad8bbd068";
-	var ingredientQuery = newIngredients;
-
-	// Dynamicaly build the ingredientQuery by grabbing all ingredients
-	// for(var key in newIngredients){
-	// 	//  Add each ingredient to the query string
-	// 	// The '%20' is for a space between each ingredient
-	// 	ingredientQuery += newIngredients[key] + '%20';
-
-	// }	
-
-		console.log("New Ingredients are " + ingredientQuery);
-
-		// Build queryURL for Ajax call
-		var queryURL = 'https://api.edamam.com/search?q=' + ingredientQuery + '&app_id=' + applicationID + '&app_key=' + receipeSearchAPIKey;
-
-		$.ajax({
-			url:queryURL,
-			method:"GET"
-		})
-		// after data returned
-		.done(function(response){
-			console.log(response);
-
-
-		})
-
-
-}
-
-//  Clear out the values of the 
+//  Clear out the values of the Ingredient Rows
 function resetIngredientRow(){
 	// Set New Ingredient row counter back to 1;
 	newIngredientNameAndRow = 1;
@@ -106,55 +72,6 @@ function addNewIngredients(){
 
 
 }
-
-var queryString ='';
-// Populate the rows
-database.ref().on("child_added", function(snapshot){
-	console.log(snapshot.val());
-	//console.log(Object.keys(snapshot.val()));
-
-	// "For each loop" to populate the ingredient rows every one contributes
-	// snapshot.forEach(function(child){
-	// 	console.log("FOR LOOP");
-	// 	var nameFirebase = snapshot.val().Object.keys(child);
-	// 	var ingredientFirebase = child.val();
-		
-	// 	console.log("Firebase Name " + nameFirebase);
-	// 	console.log("IngredientName " + ingredientFirebase);
-	// });
-	
-
-	for(var key in snapshot.val()){
-		console.log(key);
-		var nameRow = key;
-		var ingredientValue = snapshot.val()[key];
-		queryString += ingredientValue + '%20';
-
-		nameRow = nameRow.substring(0, nameRow.length - 1);
-		console.log(nameRow)
-		console.log(ingredientValue);
-
-
-
-		var newRow = $("<tr>");
-		var newNameColumn = $("<td>");
-		newNameColumn.text(nameRow);
-
-		var newIngredientColumn = $("<td>");
-		newIngredientColumn.text(ingredientValue);
-
-		newRow.append(newNameColumn,newIngredientColumn);
-		$("#ingredientsTable").append(newRow);
-
-	}
-
-
-	//var queryString ='';
-	edamamAPI(queryString);
-
-
-})
-
 
 
 // Adds a new line when the #newIngredientButton is pressed
@@ -208,3 +125,4 @@ function createIngredientLine(){
 // Button click events
 $("#feastButton").on("click", addNewIngredients);
 $("#newIngredientButton").on("click", createIngredientLine);
+
