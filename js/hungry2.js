@@ -80,8 +80,8 @@ function edamamAPI(newIngredients){
                     
                     html += '<div class="card-content">';
                     html += '<p>' + results[i].recipe.label + '</p>';
-                    html += '<p>"Calories "' +  parseInt(results[i].recipe.calories) + '</p>';
-                    html += '<p>"Yields "' + results[i].recipe.yield + " Servings </p>"
+                    html += '<p>Calories ' +  parseInt(results[i].recipe.calories) + '</p>';
+                    html += '<p>Yields ' + results[i].recipe.yield + " Servings </p>"
                     html += '</div></div></div>'
 
                     $("#recipesDiv").prepend(html);
