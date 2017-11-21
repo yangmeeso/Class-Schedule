@@ -49,25 +49,46 @@ function edamamAPI(newIngredients){
 
                     
                     //creating and sorting a div tag
-                    var recipes = $("<div>")
+                    // var recipes = $("<div>")
 
-                    var totalCalories = $("<p>").text("Calories " + results[i].recipe.calories);
-                    	console.log(results[i].recipe.calories);
-                    var servingSize = $("<p>").text("Yields " + results[i].recipe.yield + " Servings");
-                    	console.log(results[i].recipe.yield);
+                    // var totalCalories = $("<p>").text("Calories " + results[i].recipe.calories);
+                    // 	console.log(results[i].recipe.calories);
+                    // var servingSize = $("<p>").text("Yields " + results[i].recipe.yield + " Servings");
+                    // 	console.log(results[i].recipe.yield);
 
 
-                    var recipeImage = $("<img>");
+                    // var recipeImage = $("<img>");
 
-                    recipeImage.attr("src", results[i].recipe.image);
-                    recipeImage.attr("class", "recipes-Image");
-                    console.log(results[i].recipe.image)
+                    // recipeImage.attr("src", results[i].recipe.image);
+                    // recipeImage.attr("class", "recipes-Image");
+                    // console.log(results[i].recipe.image)
                 
-                    recipes.append(totalCalories);
-                    recipes.append(servingSize);
-                    recipes.append(recipeImage);
-                    console.log(recipes);
-                    $("#recipesDiv").prepend(recipes);
+                    // recipes.append(totalCalories);
+                    // recipes.append(servingSize);
+                    // recipes.append(recipeImage);
+                    // console.log(recipes);
+                    // $("#recipesDiv").prepend(recipes);
+
+
+                    var html = '';
+
+                    //html += '<div class="row">';
+                    html += '<div class="col s4 m4">';
+                    html += '<div class="card">';
+                    html += '<div class="card-image">';
+                    html += '<img src="' + results[i].recipe.image + '">';
+                    
+                    html += '<div class="card-content">';
+                    html += '<p>' + results[i].recipe.label + '</p>';
+                    html += '<p>Calories ' +  parseInt(results[i].recipe.calories) + '</p>';
+                    html += '<p>Yields ' + results[i].recipe.yield + " Servings </p>"
+                    html += '</div></div></div>'
+
+                    $("#recipesDiv").prepend(html);
+
+
+
+
                 }
 
 
