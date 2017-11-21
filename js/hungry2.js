@@ -42,6 +42,33 @@ function edamamAPI(newIngredients){
 		// after data returned
 		.done(function(response){
 			console.log(response);
+			//shortcut for response.hits
+			var results = response.hits
+
+			for (let i = 0; i < results.length; i++) {
+
+                    
+                    //creating and sorting a div tag
+                    var recipes = $("<div>")
+
+                    var totalCalories = $("<p>").text("Calories " + results[i].recipe.calories);
+                    	console.log(results[i].recipe.calories);
+                    var servingSize = $("<p>").text("Yields " + results[i].recipe.yield + " Servings");
+                    	console.log(results[i].recipe.yield);
+
+
+                    var recipeImage = $("<img>");
+
+                    recipeImage.attr("src", results[i].recipe.image);
+                    recipeImage.attr("class", "recipes-Image");
+                    console.log(results[i].recipe.image)
+                
+                    recipes.append(totalCalories);
+                    recipes.append(servingSize);
+                    recipes.append(recipeImage);
+                    console.log(recipes);
+                    $("#recipesDiv").prepend(recipes);
+                }
 
 
 		})
