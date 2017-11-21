@@ -108,3 +108,15 @@ function resetFirebase(){
     database2.ref().remove();
     console.log("Firebase Database Reset!");
 }
+
+
+//Function when Recipe card on page 2 is clicked
+function recipeCardClicked() {
+	console.log("Recipe Card Clicked!");
+}
+
+
+///THIS WORKS on Recipe Cards that have been added dynamically!!
+///Function below is used to push the answer selected to the correct answers[] array index.
+//$(document).on('click', 'recipeCard', recipeCardClicked);
+$(".recipeCard").on("click", recipeCardClicked);
