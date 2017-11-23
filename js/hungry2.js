@@ -56,7 +56,8 @@ function edamamAPI(newIngredients){
 			else if(results.length === 0){
 				// To many Ingredients, no results.
 				// What to do in this case?
-							}
+
+			}
 			else{
 				displayCount = results.length;
 			}
@@ -64,6 +65,15 @@ function edamamAPI(newIngredients){
 
 			// Clear out old recipe cards results before entering the for loop
 			$("#recipesDiv").html('');
+
+			//  Add Message saying no results when too many ingredients.  Instructions to click reset button!
+			if(displayCount === 0){
+				var noResults = $("<p>");
+				noResults.text("No Results, reset!");
+				cardColumn = noResults;
+				console.log("No Results");
+				$("#recipesDiv").html(noResults);
+			}
 
 
 			for (let i = 0; i < displayCount; i++) {
@@ -148,12 +158,7 @@ function edamamAPI(newIngredients){
 					//finally build column
 					cardColumn.append(cardDiv);
 
-					if(displayCount === 0){
-						var noResults = $("<p>");
-						noResults.text("No Results, reset!");
-
-					}
-
+					
 					// Add new cards
                     $("#recipesDiv").prepend(cardColumn);
 
