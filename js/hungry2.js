@@ -42,10 +42,31 @@ function edamamAPI(newIngredients){
 		// after data returned
 		.done(function(response){
 			console.log(response);
-			//shortcut for response.hits
-			var results = response.hits
+			// Limit of the number of result to be displayed.  
+			var maxResultsToDisplay = 9;
+			var displayCount = 0;
 
-			for (let i = 0; i < results.length; i++) {
+			var results = response.hits;
+
+			// Limits the number of results to be displayed at one time
+			if (results.length > maxResultsToDisplay)
+			{
+				displayCount = maxResultsToDisplay;
+			}
+			else if(results.length === 0){
+				// To many Ingredients, no results.
+				// What to do in this case?
+							}
+			else{
+				displayCount = results.length;
+			}
+
+
+			// Clear out old recipe cards results before entering the for loop
+			$("#recipesDiv").html('');
+
+
+			for (let i = 0; i < displayCount; i++) {
 
                     
                     //creating and sorting a div tag
@@ -69,22 +90,72 @@ function edamamAPI(newIngredients){
                     // console.log(recipes);
                     // $("#recipesDiv").prepend(recipes);
 
+                    var cardColumn = $("<col>");
+					cardColumn.addClass("col s4 m4");
 
-                    var html = '';
+					var cardDiv =  $("<div>");
+					cardDiv.addClass("card");
 
-                    //html += '<div class="row">';
-                    html += '<div class="col s4 m4">';
-                    html += '<div class="card">';
-                    html += '<div class="card-image">';
-                    html += '<img src="' + results[i].recipe.image + '">';
+					var cardImageDiv = $("<div>");
+					cardImageDiv.addClass("card-image");
+
+					var cardImage = $("<img>");
+					cardImage.attr("src", results[i].recipe.image);
+					
+					var cardTitleSpan = $("<span>");
+					cardTitleSpan.addClass("card-title");
+					cardTitleSpan.text(results[i].recipe.label);
+
+					var cardContentDiv = $("<div>");
+					cardContentDiv.addClass("card-content");
+
+					var caloriesParagraph = $("<p>");
+					caloriesParagraph.text('Calories: ' + parseInt(results[i].recipe.calories));
+
+					var yieldsParagraph = $("<p>");
+					yieldsParagraph.text('Yields: ' + results[i].recipe.yield + ' Servings');
+
+					
+					// DESPERATION METHOD of BUILDING CARDS (Re-wrote in jQuery (above and below) so Dan will stop laughing at us)
+                    // var html = '';
+
+                    // //html += '<div class="row">';
+                    // html += '<div class="col s4 m4">';
+                    // html += '<div class="card">';
+                    // html += '<div class="card-image">';
+                    // html += '<img src="' + results[i].recipe.image + '">';
                     
-                    html += '<div class="card-content">';
-                    html += '<p>' + results[i].recipe.label + '</p>';
-                    html += '<p>Calories ' +  parseInt(results[i].recipe.calories) + '</p>';
-                    html += '<p>Yields ' + results[i].recipe.yield + " Servings </p>"
-                    html += '</div></div></div>'
+                    // html += '<div class="card-content">';
+                    // html += '<p>' + results[i].recipe.label + '</p>';
+                    // html += '<p>Calories ' +  parseInt(results[i].recipe.calories) + '</p>';
+                    // html += '<p>Yields ' + results[i].recipe.yield + " Servings </p>"
+                    // html += '</div></div></div>'
 
-                    $("#recipesDiv").prepend(html);
+                    // $("#recipesDiv").prepend(html);
+
+
+                    // Append the divs correctly so the child elements are correct.  To make jQuery not close DIVs early,  need to build the children first (backwards?) then append to Parent DIV.
+
+					//build card image div
+					cardImageDiv.append(cardImage, cardTitleSpan)
+
+					//build Card Content Div
+					cardContentDiv.append(caloriesParagraph, yieldsParagraph);
+
+					//build cardDiv
+					cardDiv.append(cardImageDiv, cardContentDiv);
+
+					//finally build column
+					cardColumn.append(cardDiv);
+
+					if(displayCount === 0){
+						var noResults = $("<p>");
+						noResults.text("No Results, reset!");
+
+					}
+
+					// Add new cards
+                    $("#recipesDiv").prepend(cardColumn);
 
 
 
