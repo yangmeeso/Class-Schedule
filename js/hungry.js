@@ -40,7 +40,6 @@ function resetIngredientRow(){
 function addNewIngredients(){
 	console.log("Feast Button Clicked!");
 
-	
 	//initialize ingredientObject
 	var ingredientObject = {};
 
@@ -124,5 +123,12 @@ function createIngredientLine(){
 
 // Button click events
 $("#feastButton").on("click", addNewIngredients);
+
+//onclick event that likes page2 
+//$('#feastButton').click(function() {
+    //window.location.href = 'page2.html';
+    //return false;
+//});
+ 
 $("#newIngredientButton").on("click", createIngredientLine);
 
