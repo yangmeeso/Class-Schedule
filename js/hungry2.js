@@ -98,13 +98,17 @@ function edamamAPI(newIngredients){
                     // recipes.append(servingSize);
                     // recipes.append(recipeImage);
                     // console.log(recipes);
-                    // $("#recipesDiv").prepend(recipes);
+					// $("#recipesDiv").prepend(recipes);
 
                     var cardColumn = $("<col>");
 					cardColumn.addClass("col s4 m4");
 
 					var cardDiv =  $("<div>");
 					cardDiv.addClass("card");
+
+					var cardRef = $("<a>");
+					cardRef.attr("href", "main-recipe.html");
+					cardRef.attr("target", "_blank");
 
 					var cardImageDiv = $("<div>");
 					cardImageDiv.addClass("card-image");
@@ -152,8 +156,10 @@ function edamamAPI(newIngredients){
 					//build Card Content Div
 					cardContentDiv.append(caloriesParagraph, yieldsParagraph);
 
+					cardRef.append(cardImageDiv, cardContentDiv);
+
 					//build cardDiv
-					cardDiv.append(cardImageDiv, cardContentDiv);
+					cardDiv.append(cardRef);
 
 					//finally build column
 					cardColumn.append(cardDiv);
@@ -224,7 +230,6 @@ database2.ref().on("child_added", function(snapshot){
 
 })
 
-
 //Reset Firebase database
 $("#resetButton").on("click", resetFirebase);
 
@@ -233,14 +238,47 @@ function resetFirebase(){
     console.log("Firebase Database Reset!");
 }
 
+// function recipeCardClicked(event) {
+// 	event.preventDefault();
+// 	console.log("Chosen card number: " + blogURL);	
+// 	var recipeBlog = $("<div>").attr("href", blogURL);
 
-//Function when Recipe card on page 2 is clicked
-function recipeCardClicked() {
-	console.log("Recipe Card Clicked!");
+// 	$("#mainRecipe").append(recipeBlog); 
+// };
+
+// $(document.body).on("click", ".recipeCard", function() {
+// 	recipeCardClicked();
+//   });
+
+
+$('.modal').modal({
+	dismissible: true, // Modal can be dismissed by clicking outside of the modal
+	opacity: .5, // Opacity of modal background
+	inDuration: 300, // Transition in duration
+	outDuration: 200, // Transition out duration
+	startingTop: '4%', // Starting top style attribute
+	endingTop: '4%', // Ending top style attribute
+  }
+);
+
+function playVideo(event) {
+	event.preventDefault();
+	var test = ["tomato", "cheese", "pesto"]
+	var ytAPIKey = 'AIzaSyD6PlwA6w_Ek0A8IBNNE2rBEkXKXzr2hhE';
+	$.ajax({
+		url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&key=' + ytAPIKey + '&maxResults=20&videoEmbeddable=true&relevanceLanguage=en&q=' + test,
+		type: 'GET'
+	  })
+	  .done(function(response) {
+		console.log("video upload success");
+		console.log(response);
+		$('.video-container').html('<iframe width="1102" height="620" src="https://www.youtube.com/embed/' + response.items[0].id.videoId + '" frameborder="0" allowfullscreen></iframe>')
+	  })
+	  .fail(function() {
+		console.log("video error");
+	  });
 }
 
+$("#modalButton").on("click", playVideo); // Needs to link to Firebase
 
-///THIS WORKS on Recipe Cards that have been added dynamically!!
-///Function below is used to push the answer selected to the correct answers[] array index.
-//$(document).on('click', 'recipeCard', recipeCardClicked);
-$(".recipeCard").on("click", recipeCardClicked);
+
