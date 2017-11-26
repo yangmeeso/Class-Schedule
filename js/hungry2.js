@@ -104,11 +104,14 @@ function edamamAPI(newIngredients){
 					cardColumn.addClass("col s4 m4");
 
 					var cardDiv =  $("<div>");
-					cardDiv.addClass("card");
+					cardDiv.addClass("card recipeCard");
 
-					var cardRef = $("<a>");
-					cardRef.attr("href", "main-recipe.html");
-					cardRef.attr("target", "_blank");
+					cardDiv.attr("cardRecipeName", results[i].recipe.label);
+
+					// Moving main-recipe.html re-direct to click recipeCard funtion below
+					// var cardRef = $("<a>");
+					// cardRef.attr("href", "main-recipe.html");
+					// cardRef.attr("target", "_blank");
 
 					var cardImageDiv = $("<div>");
 					cardImageDiv.addClass("card-image");
@@ -156,10 +159,10 @@ function edamamAPI(newIngredients){
 					//build Card Content Div
 					cardContentDiv.append(caloriesParagraph, yieldsParagraph);
 
-					cardRef.append(cardImageDiv, cardContentDiv);
+					//cardRef.append(cardImageDiv, cardContentDiv);
 
 					//build cardDiv
-					cardDiv.append(cardRef);
+					cardDiv.append(cardImageDiv, cardContentDiv);
 
 					//finally build column
 					cardColumn.append(cardDiv);
@@ -263,7 +266,9 @@ $('.modal').modal({
 
 function playVideo(event) {
 	event.preventDefault();
-	var test = ["tomato", "cheese", "pesto"]
+	//var test = ["tomato", "cheese", "pesto"]
+	var test = localStorage.getItem("recipeLabelName");
+
 	var ytAPIKey = 'AIzaSyD6PlwA6w_Ek0A8IBNNE2rBEkXKXzr2hhE';
 	$.ajax({
 		url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&key=' + ytAPIKey + '&maxResults=20&videoEmbeddable=true&relevanceLanguage=en&q=' + test,
@@ -281,4 +286,19 @@ function playVideo(event) {
 
 $("#modalButton").on("click", playVideo); // Needs to link to Firebase
 
+
+
+function goToMainRecipe(){
+	// Push the recipe name into Local Storage so we can grab it on page 3.  No firebase needed Meeso!
+	var recipeNameForMainRecipePage = $(this).attr("cardRecipeName");
+	console.log($(this).attr("cardRecipeName"));
+	localStorage.setItem("recipeLabelName", recipeNameForMainRecipePage);
+
+	// Actually open a new tab for Main-Recipe.html
+	window.open("main-recipe.html",'_blank');
+}
+
+
+
+$(document).on('click', '.recipeCard', goToMainRecipe);
 
