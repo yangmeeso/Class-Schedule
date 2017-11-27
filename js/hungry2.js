@@ -12,6 +12,8 @@ firebase.initializeApp(config);
 //  Assign the reference to the database to a variable named 'database'
 var database2 = firebase.database();
 
+//  Declare the sr property of the Window object.  To be later initialized after document load.
+window.sr;
 
 
 
@@ -175,7 +177,8 @@ function edamamAPI(newIngredients){
 
 
                 }
-
+                // Re-sync scroll reveal object so that new cards will 
+                sr.sync();
 
 		})
 
@@ -267,11 +270,12 @@ $('.modal').modal({
 function playVideo(event) {
 	event.preventDefault();
 	//var test = ["tomato", "cheese", "pesto"]
-	var test = localStorage.getItem("recipeLabelName");
+	// Pulls the recipe name from local storage and used for YouTube search term.
+	var searchTerm = localStorage.getItem("recipeLabelName");
 
 	var ytAPIKey = 'AIzaSyD6PlwA6w_Ek0A8IBNNE2rBEkXKXzr2hhE';
 	$.ajax({
-		url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&key=' + ytAPIKey + '&maxResults=20&videoEmbeddable=true&relevanceLanguage=en&q=' + test,
+		url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&key=' + ytAPIKey + '&maxResults=20&videoEmbeddable=true&relevanceLanguage=en&q=' + searchTerm,
 		type: 'GET'
 	  })
 	  .done(function(response) {
@@ -302,3 +306,20 @@ function goToMainRecipe(){
 
 $(document).on('click', '.recipeCard', goToMainRecipe);
 
+
+//Scroll Reveal
+// window.sr = ScrollReveal();
+
+// sr.reveal('.recipeCard');
+
+
+
+$( document ).ready(function() {
+	console.log( "document loaded" );
+	//  Wait until document loaded before initializing Scroll Reveal object.
+	sr = ScrollReveal({reset:true});
+	//  Bind reveal animation to the recipeCard class
+	sr.reveal('.recipeCard',{opacity:0.9,duration:3000});
+	console.log("Scroll Reveal loaded");
+});
+ 
