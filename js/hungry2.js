@@ -109,11 +109,14 @@ function edamamAPI(newIngredients){
 					cardDiv.addClass("card recipeCard");
 
 					cardDiv.attr("cardRecipeName", results[i].recipe.label);
+					// Needed to grab what modal Id to display.
+					cardDiv.attr("data-modalId", '#modal'+i)
 
 					// Moving main-recipe.html re-direct to click recipeCard funtion below
-					// var cardRef = $("<a>");
-					// cardRef.attr("href", "main-recipe.html");
-					// cardRef.attr("target", "_blank");
+					var cardRef = $("<a>");
+					cardRef.attr("href", '#modal' + i);
+					cardRef.addClass("modal-trigger");
+					//cardRef.attr("target", "_blank");
 
 					var cardImageDiv = $("<div>");
 					cardImageDiv.addClass("card-image");
@@ -161,23 +164,56 @@ function edamamAPI(newIngredients){
 					//build Card Content Div
 					cardContentDiv.append(caloriesParagraph, yieldsParagraph);
 
-					//cardRef.append(cardImageDiv, cardContentDiv);
+					cardRef.append(cardImageDiv, cardContentDiv);
 
 					//build cardDiv
-					cardDiv.append(cardImageDiv, cardContentDiv);
+					//cardDiv.append(cardImageDiv, cardContentDiv);
+					cardDiv.append(cardRef);
 
 					//finally build column
 					cardColumn.append(cardDiv);
 
+					//Recreate this dynamically!!!
+					//<div id="modal1" class="modal green-text">
+						//<div class="modal-content">
+						//<h4>HI!!!!</h4>
+						//</div>
+					//</div>
+
+					// Creates the modal content!
+					var modalDiv = $("<div>");
+					modalDiv.attr('id', 'modal' + i);
+					//So will always appear on top
+					modalDiv.css("z-index", 999);
+					modalDiv.addClass("modal green-text");
+
+					var modalContenDiv = $("<div>");
+					modalContenDiv.addClass("modal-content");
+
+					var h4Text = $("<h4>");
+					h4Text.text("HI MEESO FROM DIV #" + i);
+
+					modalContenDiv.append(h4Text);
+
+					var modalFooterDiv = $("<div>");
+					var closeButton = $("<button>");
+					closeButton.addClass("modal-action modal-close waves-effect waves-green btn-flat");
+					closeButton.attr("id", "closeButton");
+					closeButton.text("Close");
+					modalFooterDiv.append(closeButton);
+
+
+					modalDiv.append(modalContenDiv, modalFooterDiv);
+
 					
 					// Add new cards
-                    $("#recipesDiv").prepend(cardColumn);
+                    $("#recipesDiv").prepend(cardColumn, modalDiv);
 
 
 
 
                 }
-                // Re-sync scroll reveal object so that new cards will 
+                // Re-sync Scroll Reveal object so aware of dynamically created cards
                 sr.sync();
 
 		})
@@ -303,8 +339,26 @@ function goToMainRecipe(){
 }
 
 
+//disable redirect since trying to utilize modal
+//$(document).on('click', '.recipeCard', goToMainRecipe);
 
-$(document).on('click', '.recipeCard', goToMainRecipe);
+var modalTarget;
+function displayBigRecipeModal(){
+	console.log("Modal id is " + $(this).attr("data-modalId"));
+	modalTarget = $(this).attr("data-modalId");
+	$(modalTarget).css("display", "block");
+
+}
+
+$(document).on('click', '.recipeCard', displayBigRecipeModal);
+
+
+function closeModal(){
+	$(modalTarget).css("display", "none");
+}
+
+
+$(document).on("click", "#closeButton", closeModal);
 
 
 
