@@ -213,7 +213,7 @@ database2.ref().on("child_added", function(snapshot){
 
 
 
-		var newRow = $('<tr id="'+key+'">');
+		var newRow = $("<tr>");
 		var newNameColumn = $("<td>");
 		newNameColumn.text(nameRow);
 
@@ -333,7 +333,7 @@ $( document ).ready(function() {
 	//  Wait until document loaded before initializing Scroll Reveal object.
 	sr = ScrollReveal({reset:true});
 	//  Bind reveal animation to the recipeCard class
-	sr.reveal('.card',{opacity:0.9,duration:3000});
+	sr.reveal('.recipeCard',{opacity:0.9,duration:3000});
 	console.log("Scroll Reveal loaded");
 });
  
