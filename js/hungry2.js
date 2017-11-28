@@ -307,19 +307,13 @@ function goToMainRecipe(){
 $(document).on('click', '.recipeCard', goToMainRecipe);
 
 
-//Scroll Reveal
-// window.sr = ScrollReveal();
-
-// sr.reveal('.recipeCard');
-
-
 
 $( document ).ready(function() {
 	console.log( "document loaded" );
 	//  Wait until document loaded before initializing Scroll Reveal object.
 	sr = ScrollReveal({reset:true});
 	//  Bind reveal animation to the recipeCard class
-	sr.reveal('.recipeCard',{opacity:0.9,duration:3000});
+	sr.reveal('.recipeCard',{opacity:0.2,duration:3000});
 	console.log("Scroll Reveal loaded");
 });
  
