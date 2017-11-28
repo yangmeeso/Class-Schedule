@@ -39,6 +39,9 @@ function resetIngredientRow(){
 //  Shoud push the ingredientObject into firebase
 function addNewIngredients(){
 	console.log("Feast Button Clicked!");
+	
+	//Open page2 in a new window
+	window.open("page2.html");
 
 	//initialize ingredientObject
 	var ingredientObject = {};
