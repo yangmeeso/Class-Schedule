@@ -7,6 +7,7 @@
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:300|Cormorant+Garamond|Khula:300|Permanent+Marker" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
@@ -20,19 +21,28 @@
 </head>
 <body>
 
+<div id="modal1" class="modal green-text">
+  <div class="modal-content center">
+    <h4>Video Recipe</h4>
+    <div class="video-container"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="modal-action modal-close waves-effect waves-green btn-flat" id="closeButton">Close</button>
+  </div>
+</div>
+
 
   <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
       <div class="container">
         <br><br>
-        <h1 class="header center teal-text text-lighten-2">We Are So Hungry!</h1>
+        <h1 class="header center teal-text text-lighten-2">W.A.S.H.</h1>
         <div class="row center">
           <table class="highlight centered responsive-table">
         <thead>
           <tr>
               <th>Name</th>
               <th>Ingredient</th>
-              
           </tr>
         </thead>
 
@@ -46,7 +56,7 @@
 
       </div>
     </div>
-    <div class="parallax"><img src="background1.jpg" alt="Unsplashed background img 1"></div>
+    <div class="parallax"><img src="background1_v2.jpg" alt="Unsplashed background img 1"></div>
   </div>
 
 
@@ -62,7 +72,7 @@
       </div>
 
       <div class="col s12">
-          <button class="waves-effect waves-light btn-large" type="button" id="resetButton"><i class="material-icons left">cloud</i>Reset!</button>
+          <button class="waves-effect waves-light btn-large" type="button" id="resetButton"><i class="material-icons right">error_outline</i>Reset</button>
           <button class="waves-effect waves-light btn-large recipeCard" type="button"><i class="material-icons left">cloud</i>RecipeCardClass!</button>
       </div>
 
@@ -73,7 +83,7 @@
 <!-- Footer -->
 <footer class="page-footer teal">
     <div class="footer-copyright center">
-      <div class="container">Footer</div>
+      <div class="container">© Copyright 2017 Eugene, Susan, Leo, Meeso</div>
     </div>
 </footer>
 

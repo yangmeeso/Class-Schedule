@@ -15,8 +15,6 @@ var database2 = firebase.database();
 //  Declare the sr property of the Window object.  To be later initialized after document load.
 window.sr;
 
-
-
 // Performs the Reciepe lookup
 function edamamAPI(newIngredients){
 
@@ -80,7 +78,6 @@ function edamamAPI(newIngredients){
 
 			for (let i = 0; i < displayCount; i++) {
 
-                    
                     //creating and sorting a div tag
                     // var recipes = $("<div>")
 
@@ -107,8 +104,8 @@ function edamamAPI(newIngredients){
 
 					var cardDiv =  $("<div>");
 					cardDiv.addClass("card recipeCard");
-
 					cardDiv.attr("cardRecipeName", results[i].recipe.label);
+					
 
 					// Moving main-recipe.html re-direct to click recipeCard funtion below
 					// var cardRef = $("<a>");
@@ -172,11 +169,8 @@ function edamamAPI(newIngredients){
 					
 					// Add new cards
                     $("#recipesDiv").prepend(cardColumn);
+				}
 
-
-
-
-                }
                 // Re-sync scroll reveal object so that new cards will 
                 sr.sync();
 
@@ -184,6 +178,8 @@ function edamamAPI(newIngredients){
 
 
 }
+
+console.log(cardRecipeName);
 
 
 
@@ -217,7 +213,7 @@ database2.ref().on("child_added", function(snapshot){
 
 
 
-		var newRow = $("<tr>");
+		var newRow = $('<tr id="'+key+'">');
 		var newNameColumn = $("<td>");
 		newNameColumn.text(nameRow);
 
@@ -267,11 +263,9 @@ $('.modal').modal({
   }
 );
 
-function playVideo(event) {
-	event.preventDefault();
-	//var test = ["tomato", "cheese", "pesto"]
-	// Pulls the recipe name from local storage and used for YouTube search term.
-	var searchTerm = localStorage.getItem("recipeLabelName");
+function playVideo() {
+	var searchTerm = localStorage.getItem("cardRecipeName");
+	console.log(searchTerm)
 
 	var ytAPIKey = 'AIzaSyD6PlwA6w_Ek0A8IBNNE2rBEkXKXzr2hhE';
 	$.ajax({
@@ -280,31 +274,51 @@ function playVideo(event) {
 	  })
 	  .done(function(response) {
 		console.log("video upload success");
-		console.log(response);
-		$('.video-container').html('<iframe width="1102" height="620" src="https://www.youtube.com/embed/' + response.items[0].id.videoId + '" frameborder="0" allowfullscreen></iframe>')
+		var videoDiv = $('<div class="videoDiv">');
+		videoDiv.append('<iframe width="1102" height="620" src="https://www.youtube.com/embed/' + response.items[0].id.videoId + '" frameborder="0" allowfullscreen></iframe>')
+		$('.video-container').append(videoDiv);
+		// $('.video-container').html('<iframe width="1102" height="620" src="https://www.youtube.com/embed/' + response.items[0].id.videoId + '" frameborder="0" allowfullscreen></iframe>')
 	  })
 	  .fail(function() {
 		console.log("video error");
 	  });
 }
 
-$("#modalButton").on("click", playVideo); // Needs to link to Firebase
+$(document).on("click", ".recipeCard", function() {
+	$("#modal1").css("display", "block");
+	playVideo();
+});
+
+$(document).on("click", "#closeButton", function() {
+	$(".video-container").empty();
+	$("#modal1").css("display", "none");
+	console.log("video closed")
+})
 
 
 
-function goToMainRecipe(){
-	// Push the recipe name into Local Storage so we can grab it on page 3.  No firebase needed Meeso!
-	var recipeNameForMainRecipePage = $(this).attr("cardRecipeName");
-	console.log($(this).attr("cardRecipeName"));
-	localStorage.setItem("recipeLabelName", recipeNameForMainRecipePage);
+// function goToMainRecipe(){
 
-	// Actually open a new tab for Main-Recipe.html
-	window.open("main-recipe.html",'_blank');
-}
+// 	var recipeNameForMainRecipePage = $(this).attr("cardRecipeName");
+// 	console.log($(this).attr("cardRecipeName"));
+// 	localStorage.setItem("recipeLabelName", recipeNameForMainRecipePage);
 
 
+// // 	// Actually open a new tab for Main-Recipe.html
+// // 	window.open("main-recipe.html",'_blank');
+// }
 
-$(document).on('click', '.recipeCard', goToMainRecipe);
+// $(document).on('click', '.recipeCard', goToMainRecipe);
+
+// $(document).on('click', '.recipeCard', function(){
+
+// 	// var name = $(this).attr("cardRecipeName")
+	
+
+	
+	
+	
+// })
 
 
 //Scroll Reveal
@@ -319,7 +333,7 @@ $( document ).ready(function() {
 	//  Wait until document loaded before initializing Scroll Reveal object.
 	sr = ScrollReveal({reset:true});
 	//  Bind reveal animation to the recipeCard class
-	sr.reveal('.recipeCard',{opacity:0.9,duration:3000});
+	sr.reveal('.card',{opacity:0.9,duration:3000});
 	console.log("Scroll Reveal loaded");
 });
  
