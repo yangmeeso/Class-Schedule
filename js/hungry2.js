@@ -236,11 +236,12 @@ database2.ref().on("child_added", function(snapshot){
 
 })
 
-//Reset Firebase database
+//Reset Firebase database and clear tbody
 $("#resetButton").on("click", resetFirebase);
 
 function resetFirebase(){
     database2.ref().remove();
+	ingredientsTable.remove();
     console.log("Firebase Database Reset!");
 }
 
