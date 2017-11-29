@@ -349,7 +349,6 @@ $('.modal').modal({
   }
 );
 
-<<<<<<< HEAD
 function playVideo(event) {
 	event.preventDefault();
 	//var test = ["tomato", "cheese", "pesto"]
@@ -359,11 +358,6 @@ function playVideo(event) {
 	
 
 	var searchTerm = localStorage.getItem("recipeLabelName");
-=======
-function playVideo() {
-	var searchTerm = localStorage.getItem("cardRecipeName");
-	console.log(searchTerm)
->>>>>>> c01fc0f55db22ede4b93e824e998881ac5c41d35
 
 	var ytAPIKey = 'AIzaSyD6PlwA6w_Ek0A8IBNNE2rBEkXKXzr2hhE';
 	$.ajax({
@@ -382,15 +376,8 @@ function playVideo() {
 	  });
 }
 
-<<<<<<< HEAD
 // $("#modalButton").on("click", playVideo); // Needs to link to Firebase
 $(".modalButtonClass").on("click", playVideo); // Needs to link to Firebase
-=======
-$(document).on("click", ".recipeCard", function() {
-	$("#modal1").css("display", "block");
-	playVideo();
-});
->>>>>>> c01fc0f55db22ede4b93e824e998881ac5c41d35
 
 $(document).on("click", "#closeButton", function() {
 	$(".video-container").empty();
