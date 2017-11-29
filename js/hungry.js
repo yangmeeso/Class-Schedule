@@ -122,12 +122,14 @@ function createIngredientLine(){
 
 
 // Button click events
-$("#feastButton").on("click", addNewIngredients);
-
+$("#feastButton").on("click", addNewIngredients, function() {
+	window.open("page2.html", "_blank");
+});
 //onclick event that likes page2 
 //$('#feastButton').click(function() {
     //window.location.href = 'page2.html';
-    //return false;
+	//return false;
+	//Open page2 in a new window
 //});
  
 $("#newIngredientButton").on("click", createIngredientLine);
