@@ -179,7 +179,7 @@ function edamamAPI(newIngredients){
 
 }
 
-console.log(cardRecipeName);
+//console.log(cardRecipeName);
 
 
 
