@@ -105,11 +105,8 @@ function edamamAPI(newIngredients){
 					var cardDiv =  $("<div>");
 					cardDiv.addClass("card recipeCard");
 					cardDiv.attr("cardRecipeName", results[i].recipe.label);
-<<<<<<< HEAD
-=======
-        	// Needed to grab what modal Id to display.
+					// Needed to grab what modal Id to display.
 					cardDiv.attr("data-modalId", '#modal'+i)
->>>>>>> 61b8e317f8280c32bfc4f98e346d2492d7f2a3d2
 
 					// Moving main-recipe.html re-direct to click recipeCard funtion below
 					var cardRef = $("<a>");
@@ -216,11 +213,7 @@ function edamamAPI(newIngredients){
 
 }
 
-<<<<<<< HEAD
-// console.log(cardRecipeName);
-=======
 //console.log(cardRecipeName);
->>>>>>> 61b8e317f8280c32bfc4f98e346d2492d7f2a3d2
 
 
 
