@@ -105,7 +105,6 @@ function edamamAPI(newIngredients){
 					var cardDiv =  $("<div>");
 					cardDiv.addClass("card recipeCard");
 					cardDiv.attr("cardRecipeName", results[i].recipe.label);
-					
 
 					// Moving main-recipe.html re-direct to click recipeCard funtion below
 					// var cardRef = $("<a>");
@@ -179,7 +178,7 @@ function edamamAPI(newIngredients){
 
 }
 
-console.log(cardRecipeName);
+// console.log(cardRecipeName);
 
 
 
@@ -304,8 +303,8 @@ $(document).on("click", "#closeButton", function() {
 // 	localStorage.setItem("recipeLabelName", recipeNameForMainRecipePage);
 
 
-// // 	// Actually open a new tab for Main-Recipe.html
-// // 	window.open("main-recipe.html",'_blank');
+// 	// Actually open a new tab for Main-Recipe.html
+// 	window.open("main-recipe.html",'_blank');
 // }
 
 // $(document).on('click', '.recipeCard', goToMainRecipe);
