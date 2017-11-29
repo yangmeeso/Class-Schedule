@@ -105,7 +105,7 @@ function edamamAPI(newIngredients){
 					var cardDiv =  $("<div>");
 					cardDiv.addClass("card recipeCard");
 					cardDiv.attr("cardRecipeName", results[i].recipe.label);
-					// Needed to grab what modal Id to display.
+        	// Needed to grab what modal Id to display.
 					cardDiv.attr("data-modalId", '#modal'+i)
 
 					// Moving main-recipe.html re-direct to click recipeCard funtion below
@@ -127,8 +127,10 @@ function edamamAPI(newIngredients){
 					var cardContentDiv = $("<div>");
 					cardContentDiv.addClass("card-content");
 
+					var caloriesPerServing = parseInt((results[i].recipe.calories)/(results[i].recipe.yield));
+
 					var caloriesParagraph = $("<p>");
-					caloriesParagraph.text('Calories: ' + parseInt(results[i].recipe.calories));
+					caloriesParagraph.text('Calories: ' + parseInt(caloriesPerServing));
 
 					var yieldsParagraph = $("<p>");
 					yieldsParagraph.text('Yields: ' + results[i].recipe.yield + ' Servings');
@@ -186,11 +188,61 @@ function edamamAPI(newIngredients){
 					var modalContenDiv = $("<div>");
 					modalContenDiv.addClass("modal-content");
 
+					////ADD STUFF HERE!!!
 					var h4Text = $("<h4>");
 					h4Text.text("HI MEESO FROM DIV #" + i);
 
-					modalContenDiv.append(h4Text);
+					
 
+					var caloriesParagraphModal = $("<p>");
+					caloriesParagraphModal.text('Calories: ' + parseInt(caloriesPerServing));
+
+
+
+
+					var yieldsParagraphModal = $("<p>");
+					yieldsParagraphModal.text('Yields: ' + results[i].recipe.yield + ' Servings');
+
+					var cardImageModal = $("<img>");
+					cardImageModal.attr("src", results[i].recipe.image);
+
+					var dailyValueModal = $("<p>");
+					var dailyValueModalDecimal = parseInt(caloriesPerServing)/2200;
+					var dailyValueModalPercent = parseInt(dailyValueModalDecimal * 100);
+					dailyValueModal.text('Daily Value: ' + dailyValueModalPercent + '%');
+
+					var instructionButton = $("<a>");
+					instructionButton.text("Instructions");
+					instructionButton.addClass("btn");
+					instructionButton.attr("href", results[i].recipe.url);
+
+					var videoButton = $("<a>");
+					videoButton.text("Video");
+					videoButton.addClass("btn modal-trigger modalButtonClass");
+					videoButton.attr("href", "#modal99");
+					//videoButton.attr("id", "modalButton");
+
+
+					var ingredientDiv = $("<div>");
+					ingredientDiv.addClass("ingredientModal");
+					var ingredientDivTitle = $("<h4>"); 
+					ingredientDivTitle.text("Ingredients");
+					ingredientDiv.append(ingredientDivTitle); 
+
+					for (var l = 0; l < results[i].recipe.ingredientLines.length; l++){
+						var ingredientLine = $("<p>");
+						//console.log ("Ingredient Line" + l + "is " + results[i].recipe.ingredientLines[l]);
+						ingredientLine.text(results[i].recipe.ingredientLines[l]);
+						ingredientDiv.append(ingredientLine);
+
+					}
+
+
+
+					modalContenDiv.append(cardImageModal,ingredientDiv, yieldsParagraphModal, caloriesParagraphModal, dailyValueModal,instructionButton, videoButton);
+					// ADD STUFF ABOVE
+
+					//Footer with the close button
 					var modalFooterDiv = $("<div>");
 					var closeButton = $("<button>");
 					closeButton.addClass("modal-action modal-close waves-effect waves-green btn-flat");
@@ -199,7 +251,7 @@ function edamamAPI(newIngredients){
 					modalFooterDiv.append(closeButton);
 
 
-					modalDiv.append(modalContenDiv, modalFooterDiv);
+					modalDiv.append(modalFooterDiv, modalContenDiv);
 
 					
 					// Add new cards
@@ -297,9 +349,21 @@ $('.modal').modal({
   }
 );
 
+<<<<<<< HEAD
+function playVideo(event) {
+	event.preventDefault();
+	//var test = ["tomato", "cheese", "pesto"]
+	// Pulls the recipe name from local storage and used for YouTube search term.
+	console.log("I AM HERE@!!!!!!!");
+	$("#modal99").css("display", "block");
+	
+
+	var searchTerm = localStorage.getItem("recipeLabelName");
+=======
 function playVideo() {
 	var searchTerm = localStorage.getItem("cardRecipeName");
 	console.log(searchTerm)
+>>>>>>> c01fc0f55db22ede4b93e824e998881ac5c41d35
 
 	var ytAPIKey = 'AIzaSyD6PlwA6w_Ek0A8IBNNE2rBEkXKXzr2hhE';
 	$.ajax({
@@ -318,10 +382,15 @@ function playVideo() {
 	  });
 }
 
+<<<<<<< HEAD
+// $("#modalButton").on("click", playVideo); // Needs to link to Firebase
+$(".modalButtonClass").on("click", playVideo); // Needs to link to Firebase
+=======
 $(document).on("click", ".recipeCard", function() {
 	$("#modal1").css("display", "block");
 	playVideo();
 });
+>>>>>>> c01fc0f55db22ede4b93e824e998881ac5c41d35
 
 $(document).on("click", "#closeButton", function() {
 	$(".video-container").empty();
@@ -338,8 +407,8 @@ $(document).on("click", "#closeButton", function() {
 // 	localStorage.setItem("recipeLabelName", recipeNameForMainRecipePage);
 
 
-// 	// Actually open a new tab for Main-Recipe.html
-// 	window.open("main-recipe.html",'_blank');
+// // 	// Actually open a new tab for Main-Recipe.html
+// // 	window.open("main-recipe.html",'_blank');
 // }
 
 // $(document).on('click', '.recipeCard', goToMainRecipe);
@@ -348,9 +417,23 @@ $(document).on("click", "#closeButton", function() {
 
 var modalTarget;
 function displayBigRecipeModal(){
+	var recipeNameForMainRecipePage = $(this).attr("cardRecipeName");
+	localStorage.setItem("recipeLabelName", recipeNameForMainRecipePage);
+
+
 	console.log("Modal id is " + $(this).attr("data-modalId"));
 	modalTarget = $(this).attr("data-modalId");
+// 	$(modalTarget).modal({
+// 	dismissible: true, // Modal can be dismissed by clicking outside of the modal
+// 	opacity: .5, // Opacity of modal background
+// 	inDuration: 300, // Transition in duration
+// 	outDuration: 200, // Transition out duration
+// 	startingTop: '4%', // Starting top style attribute
+// 	endingTop: '4%', // Ending top style attribute
+//   }
+// );
 	$(modalTarget).css("display", "block");
+
 
 }
 
