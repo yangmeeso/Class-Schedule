@@ -216,6 +216,8 @@ function edamamAPI(newIngredients){
 					instructionButton.text("Instructions");
 					instructionButton.addClass("btn");
 					instructionButton.attr("href", results[i].recipe.url);
+					instructionButton.attr("target", "_blank");
+		
 
 					// var videoButton = $("<a>");
 					// videoButton.text("Video");
