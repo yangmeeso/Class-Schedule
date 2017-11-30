@@ -15,8 +15,6 @@ var database2 = firebase.database();
 //  Declare the sr property of the Window object.  To be later initialized after document load.
 window.sr;
 
-
-
 // Performs the Reciepe lookup
 function edamamAPI(newIngredients){
 
@@ -80,7 +78,6 @@ function edamamAPI(newIngredients){
 
 			for (let i = 0; i < displayCount; i++) {
 
-                    
                     //creating and sorting a div tag
                     // var recipes = $("<div>")
 
@@ -107,13 +104,15 @@ function edamamAPI(newIngredients){
 
 					var cardDiv =  $("<div>");
 					cardDiv.addClass("card recipeCard");
-
 					cardDiv.attr("cardRecipeName", results[i].recipe.label);
+        	// Needed to grab what modal Id to display.
+					cardDiv.attr("data-modalId", '#modal'+i)
 
 					// Moving main-recipe.html re-direct to click recipeCard funtion below
-					// var cardRef = $("<a>");
-					// cardRef.attr("href", "main-recipe.html");
-					// cardRef.attr("target", "_blank");
+					var cardRef = $("<a>");
+					cardRef.attr("href", '#modal' + i);
+					cardRef.addClass("modal-trigger");
+					//cardRef.attr("target", "_blank");
 
 					var cardImageDiv = $("<div>");
 					cardImageDiv.addClass("card-image");
@@ -128,8 +127,10 @@ function edamamAPI(newIngredients){
 					var cardContentDiv = $("<div>");
 					cardContentDiv.addClass("card-content");
 
+					var caloriesPerServing = parseInt((results[i].recipe.calories)/(results[i].recipe.yield));
+
 					var caloriesParagraph = $("<p>");
-					caloriesParagraph.text('Calories: ' + parseInt(results[i].recipe.calories));
+					caloriesParagraph.text('Calories: ' + parseInt(caloriesPerServing));
 
 					var yieldsParagraph = $("<p>");
 					yieldsParagraph.text('Yields: ' + results[i].recipe.yield + ' Servings');
@@ -161,29 +162,112 @@ function edamamAPI(newIngredients){
 					//build Card Content Div
 					cardContentDiv.append(caloriesParagraph, yieldsParagraph);
 
-					//cardRef.append(cardImageDiv, cardContentDiv);
+					cardRef.append(cardImageDiv, cardContentDiv);
 
 					//build cardDiv
-					cardDiv.append(cardImageDiv, cardContentDiv);
+					//cardDiv.append(cardImageDiv, cardContentDiv);
+					cardDiv.append(cardRef);
 
 					//finally build column
 					cardColumn.append(cardDiv);
 
+					//Recreate this dynamically!!!
+					//<div id="modal1" class="modal green-text">
+						//<div class="modal-content">
+						//<h4>HI!!!!</h4>
+						//</div>
+					//</div>
+
+					// Creates the modal content!
+					var modalDiv = $("<div>");
+					modalDiv.attr('id', 'modal' + i);
+					//So will always appear on top
+					modalDiv.css("z-index", 999);
+					modalDiv.addClass("modal green-text");
+
+					var modalContenDiv = $("<div>");
+					modalContenDiv.addClass("modal-content");
+
+					////ADD STUFF HERE!!!
+					var h4Text = $("<h4>");
+					h4Text.text("HI MEESO FROM DIV #" + i);
+
+					
+
+					var caloriesParagraphModal = $("<p>");
+					caloriesParagraphModal.text('Calories: ' + parseInt(caloriesPerServing));
+
+
+
+
+					var yieldsParagraphModal = $("<p>");
+					yieldsParagraphModal.text('Yields: ' + results[i].recipe.yield + ' Servings');
+
+					var cardImageModal = $("<img>");
+					cardImageModal.attr("src", results[i].recipe.image);
+					cardImageModal.attr("id", "cardPhoto");
+
+					var dailyValueModal = $("<p>");
+					var dailyValueModalDecimal = parseInt(caloriesPerServing)/2200;
+					var dailyValueModalPercent = parseInt(dailyValueModalDecimal * 100);
+					dailyValueModal.text('Daily Value: ' + dailyValueModalPercent + '%');
+
+					var instructionButton = $("<a>");
+					instructionButton.text("Instructions");
+					instructionButton.addClass("btn");
+					instructionButton.attr("href", results[i].recipe.url);
+
+					// var videoButton = $("<a>");
+					// videoButton.text("Video");
+					// videoButton.addClass("btn modal-trigger modalButtonClass");
+					// videoButton.attr("href", "#modal99");
+					//videoButton.attr("id", "modalButton");
+
+
+					var ingredientDiv = $("<div>");
+					ingredientDiv.addClass("ingredientModal");
+					var ingredientDivTitle = $("<h4>"); 
+					ingredientDivTitle.text("Ingredients");
+					ingredientDiv.append(ingredientDivTitle); 
+
+					for (var l = 0; l < results[i].recipe.ingredientLines.length; l++){
+						var ingredientLine = $("<p>");
+						//console.log ("Ingredient Line" + l + "is " + results[i].recipe.ingredientLines[l]);
+						ingredientLine.text(results[i].recipe.ingredientLines[l]);
+						ingredientDiv.append(ingredientLine);
+
+					}
+
+
+
+					// modalContenDiv.append(cardImageModal,ingredientDiv, yieldsParagraphModal, caloriesParagraphModal, dailyValueModal,instructionButton, videoButton);
+					modalContenDiv.append(cardImageModal,ingredientDiv, yieldsParagraphModal, caloriesParagraphModal, dailyValueModal,instructionButton);
+					// ADD STUFF ABOVE
+
+					//Footer with the close button
+					var modalFooterDiv = $("<div>");
+					var closeButton = $("<button>");
+					closeButton.addClass("modal-action modal-close waves-effect waves-green btn-flat");
+					closeButton.attr("id", "closeButton");
+					closeButton.text("Close");
+					modalFooterDiv.append(closeButton);
+
+
+					modalDiv.append(modalFooterDiv, modalContenDiv);
+
 					
 					// Add new cards
-                    $("#recipesDiv").prepend(cardColumn);
-
-
-
-
-                }
-                // Re-sync scroll reveal object so that new cards will 
-                sr.sync();
+          $("#recipesDiv").prepend(cardColumn, modalDiv);
+        
+        }
+          sr.sync();
 
 		})
 
 
 }
+
+//console.log(cardRecipeName);
 
 
 
@@ -271,6 +355,10 @@ function playVideo(event) {
 	event.preventDefault();
 	//var test = ["tomato", "cheese", "pesto"]
 	// Pulls the recipe name from local storage and used for YouTube search term.
+	console.log("I AM HERE@!!!!!!!");
+	$("#modal99").css("display", "block");
+	
+
 	var searchTerm = localStorage.getItem("recipeLabelName");
 
 	var ytAPIKey = 'AIzaSyD6PlwA6w_Ek0A8IBNNE2rBEkXKXzr2hhE';
@@ -280,31 +368,75 @@ function playVideo(event) {
 	  })
 	  .done(function(response) {
 		console.log("video upload success");
-		console.log(response);
-		$('.video-container').html('<iframe width="1102" height="620" src="https://www.youtube.com/embed/' + response.items[0].id.videoId + '" frameborder="0" allowfullscreen></iframe>')
+		var videoDiv = $('<div class="videoDiv">');
+		videoDiv.append('<iframe width="1102" height="620" src="https://www.youtube.com/embed/' + response.items[0].id.videoId + '" frameborder="0" allowfullscreen></iframe>')
+		$('.video-container').append(videoDiv);
+		// $('.video-container').html('<iframe width="1102" height="620" src="https://www.youtube.com/embed/' + response.items[0].id.videoId + '" frameborder="0" allowfullscreen></iframe>')
 	  })
 	  .fail(function() {
 		console.log("video error");
 	  });
 }
 
-$("#modalButton").on("click", playVideo); // Needs to link to Firebase
+// $("#modalButton").on("click", playVideo); // Needs to link to Firebase
+$(".modalButtonClass").on("click", playVideo); // Needs to link to Firebase
+
+$(document).on("click", "#closeButton", function() {
+	$(".video-container").empty();
+	$("#modal1").css("display", "none");
+	console.log("video closed")
+})
 
 
 
-function goToMainRecipe(){
-	// Push the recipe name into Local Storage so we can grab it on page 3.  No firebase needed Meeso!
+// function goToMainRecipe(){
+
+// 	var recipeNameForMainRecipePage = $(this).attr("cardRecipeName");
+// 	console.log($(this).attr("cardRecipeName"));
+// 	localStorage.setItem("recipeLabelName", recipeNameForMainRecipePage);
+
+
+// // 	// Actually open a new tab for Main-Recipe.html
+// // 	window.open("main-recipe.html",'_blank');
+// }
+
+// $(document).on('click', '.recipeCard', goToMainRecipe);
+//disable redirect since trying to utilize modal
+//$(document).on('click', '.recipeCard', goToMainRecipe);
+
+var modalTarget;
+function displayBigRecipeModal(){
 	var recipeNameForMainRecipePage = $(this).attr("cardRecipeName");
-	console.log($(this).attr("cardRecipeName"));
 	localStorage.setItem("recipeLabelName", recipeNameForMainRecipePage);
 
-	// Actually open a new tab for Main-Recipe.html
-	window.open("main-recipe.html",'_blank');
+
+	console.log("Modal id is " + $(this).attr("data-modalId"));
+	modalTarget = $(this).attr("data-modalId");
+// 	$(modalTarget).modal({
+// 	dismissible: true, // Modal can be dismissed by clicking outside of the modal
+// 	opacity: .5, // Opacity of modal background
+// 	inDuration: 300, // Transition in duration
+// 	outDuration: 200, // Transition out duration
+// 	startingTop: '4%', // Starting top style attribute
+// 	endingTop: '4%', // Ending top style attribute
+//   }
+// );
+	$(modalTarget).css("display", "block");
+
+
+}
+
+$(document).on('click', '.recipeCard', displayBigRecipeModal);
+
+
+function closeModal(){
+	$(modalTarget).css("display", "none");
 }
 
 
+$(document).on("click", "#closeButton", closeModal);
 
-$(document).on('click', '.recipeCard', goToMainRecipe);
+
 
 
 

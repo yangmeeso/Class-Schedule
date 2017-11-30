@@ -1,4 +1,12 @@
 body{
-   background-image: url("../assets/images/dust_scratches.png");
-   /*background-color: #cccccc;*/
-}
+    background-image: url("../assets/images/dust_scratches.png");
+    /*background-color: #cccccc;*/
+ }
+ 
+ .superButton{
+     display:none;
+ }
+ 
+ .ingredientModal{
+     float:right;
+ }

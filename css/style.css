@@ -55,3 +55,65 @@ p {
 footer.page-footer {
   margin: 0;
 }
+
+
+h1.header {
+  font-family: 'Permanent Marker', cursive;
+  font-style: italic;
+}
+
+h4.projectDesc {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+h5 {
+  text-align: center;
+  font-family: 'Khula', sans-serif;
+  color: #e9e9e9;
+  font-size: 15px;
+}
+
+#question {
+  font-style: italic;
+  font-size: 24px;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+#headerDesc {
+  margin-top: -16px;
+}
+
+p {
+  font-family: 'Khula', sans-serif;
+  color: #444;
+}
+
+#ingredientRows {
+  font-family: 'Khula', sans-serif;
+}
+
+#ingredinetsTable {
+  font-family: 'Khula', sans-serif;
+}
+
+.card-title {
+  font-family: 'Permanent Marker', cursive;
+  font-style: italic;
+  text-shadow: 2px 2px #ff00b3;
+}
+
+.card-content {
+  font-family: 'Khula', sans-serif;
+  color: #444;
+  font-weight: bold;
+}
+
+.ingredientModal {
+  font-family: 'Permanent Marker', cursive;
+  color: #444;
+  max-width: 45%;
+}
+
+p.ingredientModal {
+  font-family: 'Khula', sans-serif;
+}

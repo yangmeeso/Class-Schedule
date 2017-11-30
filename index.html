@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>We are So Hungry!</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:300|Cormorant+Garamond|Khula:300|Permanent+Marker" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/hungryStyle.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="  crossorigin="anonymous"></script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+
+</head>
+<body>
+
+
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header center teal-text text-lighten-2">W.A.S.H.</h1>
+        <br><br>
+
+      </div>
+    </div>
+    <div class="parallax"><img src="background1_v2.jpg" alt="Unsplashed background img 1"></div>
+  </div>
+
+
+<div class="container">
+    <div class="section">
+
+      <div class="row">
+        <div class="col s12 center">
+          <h3><i class="mdi-content-send brown-text"></i></h3>
+          <h4 class="projectDesc">Project Description</h4>
+          <p class="left-align light">Have you ever found yourself not knowing what to cook because all your fridge has are random ingredients? 
+            Have no fear, I’m So Hungry is soon to be here. This application will allow the user(s) to submit a list of ingredients, 
+            they have in their possession, and the application will populate a list of recipes for said ingredients. Want to make it interesting? 
+            Try it with a group. Invite your friends to submit their ingredients along with yours and get recipes for all of you to cook together. 
+            Some of the features for this application will include firebase, multi-user function and will be mobile responsive.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  
+
+
+  <div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <div class="header col s12 light" id="instruction">
+            <h5 id="question">How to use?</h5>
+            <h5>Add your name and ingredient(s) below,</h5> 
+            <h5>and click "FEAST" button to move onto the recipe suggestions.</h5>
+            <h5>If you have more than one ingredient, click "ADD" button.</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="background2_v2.jpg" alt="Unsplashed background img 2"></div>
+  </div>
+
+  
+<div class="container">
+    <div class="section">
+
+      <!--   New Ingredient Section   -->
+      <div class="row">
+        
+
+          <div class="row">
+            <form class="col s12">
+              <div class="row" id="ingredientRows">
+                <div class="input-field col s6">
+                  <input id="yourName0" type="text" class="validate" required="">
+                  <label for="yourName0" data-error="Name Cannot be blank">Your Name</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="ingredient0" type="text" class="validate">
+                  <label for="ingredient0">Ingredient</label>
+                </div>
+              </div>
+              <div class="row" id="buttonRows">
+                <div class="col s6">
+                  <button class="waves-effect waves-light btn-large" type="button" id="feastButton"><i class="material-icons right">mood</i>Feast</button>
+                </div>
+                <div class="col s6">
+                  <button class="waves-effect waves-light btn-large" type="button" id="newIngredientButton"><i class="material-icons right">exposure_plus_1</i>Add</button>
+                </div>
+              </div>
+            </form>
+
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  
+
+  <footer class="page-footer teal center">
+    
+    <div class="footer-copyright">
+      <div class="container">
+      © Copyright 2017 Eugene, Susan, Leo, Meeso</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  <!-- Link to our javascript logic -->
+  <script type="text/javascript" src="js/hungry.js"></script>
+
+</body>
+</html>
