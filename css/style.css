@@ -45,11 +45,6 @@ p {
   }
 }
 
-.parallax img {
-  max-height: 100%;
-  max-width: 100%;
-}
-
 .icon-block {
   padding: 0 15px;
 }
@@ -59,8 +54,8 @@ p {
 
 footer.page-footer {
   margin: 0;
-  font-family: 'Cormorant Garamond', serif;
 }
+
 
 h1.header {
   font-family: 'Permanent Marker', cursive;
@@ -90,6 +85,7 @@ h5 {
 
 p {
   font-family: 'Khula', sans-serif;
+  color: #444;
 }
 
 #ingredientRows {
@@ -110,4 +106,14 @@ p {
   font-family: 'Khula', sans-serif;
   color: #444;
   font-weight: bold;
+}
+
+.ingredientModal {
+  font-family: 'Permanent Marker', cursive;
+  color: #444;
+  max-width: 45%;
+}
+
+p.ingredientModal {
+  font-family: 'Khula', sans-serif;
 }

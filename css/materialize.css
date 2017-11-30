@@ -980,7 +980,7 @@
 }
 
 .teal {
-  background-color: #000000 !important;
+  background-color: #009688 !important;
 }
 
 .teal-text {
@@ -1012,11 +1012,11 @@
 }
 
 .teal.lighten-2 {
-  background-color: #ffc342 !important;
+  background-color: #4db6ac !important;
 }
 
 .teal-text.text-lighten-2 {
-  color: #ffc342 !important;
+  color: #4db6ac !important;
 }
 
 .teal.lighten-1 {
@@ -2779,9 +2779,8 @@ video.responsive-video {
   position: absolute;
   left: 50%;
   bottom: 0;
-  max-width: 980px;
-  width: 100%;
-  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
   -webkit-transform: translateX(-50%);
@@ -2879,7 +2878,7 @@ ul.staggered-list li {
 }
 
 .page-footer {
-  padding-top: 5px;
+  padding-top: 20px;
   color: #fff;
   background-color: #ee6e73;
 }
@@ -3422,7 +3421,7 @@ nav ul a span.badge {
   float: left;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  padding: 0;
+  padding: 0 0.75rem;
   min-height: 1px;
 }
 
@@ -4493,7 +4492,7 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 h1 {
   font-size: 4.2rem;
   line-height: 110%;
-  margin: 25px 0 60px 0;
+  margin: 2.1rem 0 1.68rem 0;
 }
 
 h2 {
@@ -5208,7 +5207,7 @@ small {
 .btn, .btn-large {
   text-decoration: none;
   color: #fff;
-  background-color: #ad3700;
+  background-color: #26a69a;
   text-align: center;
   letter-spacing: .5px;
   -webkit-transition: .2s ease-out;
@@ -5639,11 +5638,12 @@ button.btn-floating {
   overflow-y: auto;
   border-radius: 2px;
   will-change: top, opacity;
+  margin-top: -300px;
 }
 
 @media only screen and (max-width: 992px) {
   .modal {
-    width: 80%;
+    width: 95%;
   }
 }
 
@@ -5652,7 +5652,7 @@ button.btn-floating {
 }
 
 .modal .modal-content {
-  padding: 24px;
+  padding: 30px;
 }
 
 .modal .modal-close {

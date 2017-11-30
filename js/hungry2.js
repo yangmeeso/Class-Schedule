@@ -205,6 +205,7 @@ function edamamAPI(newIngredients){
 
 					var cardImageModal = $("<img>");
 					cardImageModal.attr("src", results[i].recipe.image);
+					cardImageModal.attr("id", "cardPhoto");
 
 					var dailyValueModal = $("<p>");
 					var dailyValueModalDecimal = parseInt(caloriesPerServing)/2200;
@@ -216,10 +217,10 @@ function edamamAPI(newIngredients){
 					instructionButton.addClass("btn");
 					instructionButton.attr("href", results[i].recipe.url);
 
-					var videoButton = $("<a>");
-					videoButton.text("Video");
-					videoButton.addClass("btn modal-trigger modalButtonClass");
-					videoButton.attr("href", "#modal99");
+					// var videoButton = $("<a>");
+					// videoButton.text("Video");
+					// videoButton.addClass("btn modal-trigger modalButtonClass");
+					// videoButton.attr("href", "#modal99");
 					//videoButton.attr("id", "modalButton");
 
 
@@ -239,7 +240,8 @@ function edamamAPI(newIngredients){
 
 
 
-					modalContenDiv.append(cardImageModal,ingredientDiv, yieldsParagraphModal, caloriesParagraphModal, dailyValueModal,instructionButton, videoButton);
+					// modalContenDiv.append(cardImageModal,ingredientDiv, yieldsParagraphModal, caloriesParagraphModal, dailyValueModal,instructionButton, videoButton);
+					modalContenDiv.append(cardImageModal,ingredientDiv, yieldsParagraphModal, caloriesParagraphModal, dailyValueModal,instructionButton);
 					// ADD STUFF ABOVE
 
 					//Footer with the close button
