@@ -68,6 +68,7 @@ function addNewIngredients(){
 
 	// Reset after hitting feast button
 	resetIngredientRow();
+	window.location.href = 'about.html';
 
 
 }
@@ -125,10 +126,11 @@ function createIngredientLine(){
 $("#feastButton").on("click", addNewIngredients);
 
 //onclick event that likes page2 
-//$('#feastButton').click(function() {
-    //window.location.href = 'page2.html';
-    //return false;
-//});
+// $('#feastButton').on("click", function() {
+// 	console.log("HI MMMMMMM");
+// 	window.location.href = 'about.html';
+//     return false;
+// });
  
 $("#newIngredientButton").on("click", createIngredientLine);
 
